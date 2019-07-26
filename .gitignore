@@ -1,0 +1,18 @@
+#no SFC, no SMC
+*.sfc
+*.smc
+
+#no related things
+*.cht
+*.srm
+*.bst
+
+#no build script
+*.bat
+
+#no cross assembler
+asar/
+xkas/
+
+#dumping ground for related things that don't go to the repo
+etc/

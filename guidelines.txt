@@ -1,0 +1,12 @@
+
+1) Every successful project needs a goal (if it can be finished), or a mission statement (if it has no obvious end).
+
+2) It is a privilege to have an audience.  Community is a thing to encourage.
+
+3) Don't be so afraid of breaking things that you never change anything.
+
+4) Fun should not be the victim of competition or purism.  A game can evolve beyond its roots.
+
+5) Don't break the game in an attempt to prevent people from cheating or exploiting bugs.
+
+6) Make a mechanism to transfer ownership/responsibility of coding projects to new individuals over time.  No one person ever satisfactorily works on the same thing forever.
