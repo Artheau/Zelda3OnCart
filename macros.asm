@@ -5,3 +5,5 @@
 !SCREEN_HEIGHT = "$E0"
 
 !BIG_TILE_HEIGHT = "$10"   ;for code readability, mostly.  I don't recommend changing this
+
+!DIALOGUE_MASH_DELAY_TIMER = "$40"   ;prevents the user from rapidly pressing the A button to accidentally advance through dialogue

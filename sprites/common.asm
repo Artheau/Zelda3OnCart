@@ -149,42 +149,42 @@ Sprite_ShowSolicitedMessageIfPlayerFacing:  ;8-bit
     ;   C: set if message is a success
     ;   A: the direction the sprite should face (either turns to face player, or no change)
     
-    STA $1CF0
-    STY $1CF1
+    STA.w text_message_index_lsb
+    STY.w text_message_index_msb
     
     JSL Sprite_CheckDamageToPlayerSameLayerLong : BCC .alpha
     JSL Sprite_CheckIfPlayerPreoccupied : BCS .alpha
     
     ;check for A button press
-    LDA controller_1_input_msb
+    LDA.w controller_1_input_msb
     BPL .alpha
     
-    LDA sprite_mash_interaction_delay_timer, X
+    LDA.w sprite_mash_interaction_delay_timer, X
     BNE .alpha
     
-    LDA link_motility_type
-    CMP.b #!LINK_MOTILITY_WATER_TRANSITION
+    LDA.b link_motility_type
+    CMP.b #!LINK_MOTILITY_TYPE_WATER_TRANSITION
     BEQ .alpha
     
     ; Make sure Link is facing the sprite
-    JSL Sprite_DirectionToFacePlayerLong    ;Y = direction from player to sprite (left, right, up, down)
+    JSL Sprite_DirectionToFacePlayer    ;Y = direction from player to sprite (left, right, up, down)
     PHX
     TYX
     LDA.l .facing_direction_data, X
     PLX
-    CMP link_facing_direction
+    CMP.b link_facing_direction
     BNE .not_facing_sprite
     
     PHY
     
-    LDA $1CF0
-    LDY $1CF1
+    LDA.w text_message_index_lsb
+    LDY.w text_message_index_msb
     
     JSL Sprite_ShowMessageUnconditional
     
     ;no mashing
-    LDA.b #$40
-    STA sprite_mash_interaction_delay_timer, X
+    LDA.b #!DIALOGUE_MASH_DELAY_TIMER
+    STA.w sprite_mash_interaction_delay_timer, X
     
     PLA : EOR.b #$03    ;A now contains the direction for the sprite to face the player
     SEC                 ;indicate success by setting the carry bit
@@ -194,7 +194,7 @@ Sprite_ShowSolicitedMessageIfPlayerFacing:  ;8-bit
     .not_facing_sprite
     .alpha
 
-        LDA sprite_body_facing, X
+        LDA.w sprite_body_facing, X
         CLC             ;indicate failure by clearing the carry bit
     
         RTL
@@ -203,3 +203,49 @@ Sprite_ShowSolicitedMessageIfPlayerFacing:  ;8-bit
 
         db !LINK_FACING_DIRECTION_LEFT, !LINK_FACING_DIRECTION_RIGHT, !LINK_FACING_DIRECTION_UP, !LINK_FACING_DIRECTION_DOWN
 
+
+org $A0F000
+Sprite_ShowMessageUnconditional:
+	; Routine is used to display a text message with
+	; an ID that is inputted via A and Y registers.
+	; A = low byte of message ID to use.
+	; Y = high byte of message ID to use.
+
+	STA.w text_message_index_lsb
+	STY.w text_message_index_msb
+
+	STZ.w dialogue_subcontroller
+
+	LDA.b #!GLOBAL_MODULE_TEXTBOX_ITEMS_OR_MAP_SUBMODULE_DIALOGUE
+	STA.b global_submodule_index
+
+	LDA.b global_module_index
+	STA.w temp_storage_global_module_index
+
+	; switch to text module
+	LDA.b #!GLOBAL_MODULE_TEXTBOX_ITEMS_OR_MAP
+	STA.b global_module_index
+
+	PHX
+
+	JSL Sprite_NullifyHookshotDrag
+
+	STZ.b link_movement_speed_setting   ;set to walking pace
+
+	JSL Player_HaltDashAttack
+
+	STZ.b link_motility_type
+	STZ.b link_ignore_controls_timer
+
+	LDA.b link_present_action
+	CMP.b #!LINK_PRESENT_ACTION_BONK_OR_HURT
+	BNE .exit
+
+	LDA.b #!LINK_PRESENT_ACTION_NORMAL
+	STA.b link_present_action
+
+	.exit
+
+	PLX
+
+	RTL

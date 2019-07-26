@@ -8,3 +8,11 @@ JML Sprite_DrawShadowLong
 org $8DC4A5
 Sprite_SweepingWomanTrampoline:
 JML Sprite_SweepingWoman           ;8-bit routine
+
+org $85E1A7
+Sprite_ShowSolicitedMessageIfPlayerFacingTrampoline:
+JML Sprite_ShowSolicitedMessageIfPlayerFacing         ;8-bit routine
+
+org $85E219
+Sprite_ShowMessageUnconditionalTrampoline:
+JML Sprite_ShowMessageUnconditional                ;8-bit routine

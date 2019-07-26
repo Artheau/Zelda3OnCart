@@ -104,12 +104,6 @@ org $85DF6C
 Sprite_DrawMultiple:
 	org $85DF75
 	.PlayerDeferred:
-
-org $85E219
-Sprite_ShowMessageUnconditional:
-
-org $85E1A7
-;Sprite_ShowSolicitedMessageIfPlayerFacing:
 ;=========================================================
 
 
@@ -120,7 +114,7 @@ org $86F129
 Sprite_CheckDamageToPlayerSameLayerLong:
 
 org $86EAA0
-Sprite_DirectionFromPlayerLong:
+Sprite_DirectionToFacePlayer:
 
 ;$06FFF8-$06FFFF fill
 org $86FFF8
@@ -131,6 +125,9 @@ warnpc $870000
 ;=========================================================
 ;bank $07
 ;=========================================================
+org $8791B9
+Player_HaltDashAttack:
+
 org $87F4D0
 Sprite_CheckIfPlayerPreoccupied:
 
@@ -254,8 +251,12 @@ warnpc $8F0000
 ;=========================================================
 ;bank $0F
 ;=========================================================
+org $8FF540
+Sprite_NullifyHookshotDrag:
+
 ;$0FFE72-$0FFFFF fill?
 org $8FFE72
+
 warnpc $900000
 ;=========================================================
 
