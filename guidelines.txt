@@ -5,8 +5,10 @@
 
 3) Don't be so afraid of breaking things that you never change anything.
 
-4) Fun should not be the victim of competition or purism.  A game can evolve beyond its roots.
+4) Don't be so cavalier about breaking things that you write hacky code.  Keep the codebase clean.
 
-5) Don't break the game in an attempt to prevent people from cheating or exploiting bugs.
+5) Fun should not be the victim of competition or purism.  A game can evolve beyond its roots.
 
-6) Make a mechanism to transfer ownership/responsibility of coding projects to new individuals over time.  No one person ever satisfactorily works on the same thing forever.
+6) Don't break the game in an attempt to prevent people from cheating or exploiting bugs.
+
+7) Make a mechanism to transfer ownership/responsibility of coding projects to new individuals over time.  No one person ever satisfactorily works on the same thing forever.
